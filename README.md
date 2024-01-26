@@ -1,2 +1,2 @@
 # FrontEnd
-This is a FrontEnd Repo for our CPESTONE PROJECT
+This is a FrontEnd Repo for our CAPESTONE PROJECT
