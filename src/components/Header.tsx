@@ -1,9 +1,10 @@
-import { useGlobalContext } from "providers/GlobalProvider";
+import { useGlobalContext } from "../providers/GlobalProvider";
+import { logout } from "../providers/actionCreators";
 import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Header() {
-  const { loggedIn } = useGlobalContext();
+  const { loggedIn, dispatch } = useGlobalContext();
   return (
     <div
       style={{
@@ -17,7 +18,7 @@ export default function Header() {
       }}
     >
       <div style={{ color: 'white'}}>Logo</div> {/* Replace 'Logo' with your logo image or text */}
-      {loggedIn && <div>Logout</div>}
+      {loggedIn && <div style={{ color: 'white', cursor: 'pointer'}} onClick={() => dispatch(logout())}>Logout</div>}
       {!loggedIn && (
         <div style={{ color: 'white', marginRight: '15px'}}>
           <Link style={{ color: 'white'}} to="/login">Login</Link> &nbsp;

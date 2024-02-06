@@ -17,3 +17,12 @@ export const saveUser = (user: User): CustomDispatchAction => {
     },
   };
 };
+
+
+export const logout = (): CustomDispatchAction => {
+  return {
+    type: "LOGOUT",
+    payload: {
+    },
+  };
+};

@@ -16,6 +16,7 @@ export const globalReducer = (
       return { ...state, user, loggedIn, token: tokenValue };
     }
     case "LOGOUT":
+      localStorage.removeItem("token")
       return { ...state, loggedIn: false, user: {} as User, token: "" };
     default:
       return state;
