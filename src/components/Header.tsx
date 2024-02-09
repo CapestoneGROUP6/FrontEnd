@@ -17,12 +17,12 @@ export default function Header() {
         alignItems: "center",
       }}
     >
-      <div style={{ color: 'white'}}>Logo</div> {/* Replace 'Logo' with your logo image or text */}
-      {loggedIn && <div style={{ color: 'white', cursor: 'pointer'}} onClick={() => dispatch(logout())}>Logout</div>}
+      <div style={{ color: 'white',padding:"10px" }}>Logo</div>
+      {loggedIn && <div style={{ color: 'white', cursor: 'pointer' }} onClick={() => dispatch(logout())}>Logout</div>}
       {!loggedIn && (
-        <div style={{ color: 'white', marginRight: '15px'}}>
-          <Link style={{ color: 'white'}} to="/login">Login</Link> &nbsp;
-          <Link style={{ color: 'white'}} to="/signup">Signup</Link>
+        <div style={{ color: 'white', marginRight: '15px' }}>
+          <Link style={{ color: 'white', textDecoration: "none" ,padding:"10px"}} to="/login">Login</Link> &nbsp;
+          <Link style={{ color: 'white', textDecoration: "none",padding:"10px" }} to="/signup">Signup</Link>
         </div>
       )}
     </div>

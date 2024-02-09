@@ -77,45 +77,50 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {state.serverError && <span>{state.serverError}</span>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={state.username}
-            onChange={onChange}
-          />
-          {state.usernameError && <span>{state.usernameError}</span>}
+    <div className="container" style={{ width: '30%', margin: '50px auto', boxShadow: "0 0 10px lightgray", borderRadius: "10px", padding: "15px" }}>
+      {state.serverError && <span className="text-danger">{state.serverError}</span>}
+      <form className="mt-3" onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <div className="form-group">
+          <label htmlFor="username" className="col-form-label">Username:</label>
+          <div>
+            <input
+              type="text"
+              className="form-control"
+              name="username"
+              value={state.username}
+              onChange={onChange}
+            />
+            {state.usernameError && <span className="text-danger">{state.usernameError}</span>}
+          </div>
         </div>
-        <div>
+        <div className="form-group" style={{ marginTop: '15px' }}>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
+            className="form-control"
             name="password"
+            style={{ marginTop: '15px' }}
             value={state.password}
             onChange={onChange}
           />
-          {state.passwordError && <span>{state.passwordError}</span>}
+          {state.passwordError && <span className="text-danger">{state.passwordError}</span>}
         </div>
-        <div>
-          <button type="submit">Login</button>
+        <div className="form-group" style={{ marginTop: '15px' }}>
+          <button type="submit" className="btn btn-primary">Login</button>
         </div>
-        <div>
-          <Link to="/signup">
-            Dont Have an Account?
-          </Link>{" "}
+        <div className="form-group" style={{ marginTop: '15px' }}>
+          <p className="text-muted">
+            Don't have an account? <Link to="/signup" className="text-decoration-none">Sign up</Link>
+          </p>
         </div>
-        <div>
-          <Link to="/forgotpassword">
-            Forgot Password
-          </Link>{" "}
-          &nbsp;
+        <div className="form-group" style={{ marginTop: '15px' }}>
+          <p className="text-muted">
+            <Link to="/forgotpassword" className="text-decoration-none">Forgot Password</Link>{" "}
+          </p>
         </div>
       </form>
     </div>
+
   );
 }

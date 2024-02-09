@@ -81,51 +81,59 @@ export default function Signup() {
       }
     }
   };
+  
 
   return (
-    <div>
+    <div className="container" style={{ width: '30%', margin: '50px auto', boxShadow: "0 0 10px lightgray", borderRadius: "10px" , padding:"15px"}}>
       <h2>Signup</h2>
-      {state.serverError && <span>{state.serverError}</span>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
+      {state.serverError && <span className="text-danger">{state.serverError}</span>}
+      <form className="mt-3" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label style={{ marginTop:"10px",}} htmlFor="username">Username:</label>
           <input
             type="text"
+            className="form-control"
             name="username"
+            style={{ marginTop:"10px",}}
             value={state.username}
             onChange={onChange}
           />
-          {state.usernameError && <span>{state.usernameError}</span>}
+          {state.usernameError && <span className="text-danger">{state.usernameError}</span>}
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className="form-group">
+          <label  style={{ marginTop:"10px",}} htmlFor="password">Password:</label>
           <input
             type="password"
+            className="form-control"
             name="password"
+            style={{ marginTop:"10px",}}
             value={state.password}
             onChange={onChange}
           />
-          {state.passwordError && <span>{state.passwordError}</span>}
+          {state.passwordError && <span className="text-danger">{state.passwordError}</span>}
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
+        <div className="form-group">
+          <label style={{ marginTop:"10px",}} htmlFor="email">Email:</label>
           <input
             type="email"
+            className="form-control"
             name="email"
+            style={{ marginTop:"10px",}}
             value={state.email}
             onChange={onChange}
           />
-          {state.emailError && <span>{state.emailError}</span>}
+          {state.emailError && <span className="text-danger">{state.emailError}</span>}
         </div>
-        <div>
-          <button type="submit">SignUp</button>
+        <div className="form-group" style={{ marginTop:"10px",}}>
+          <button type="submit" className="btn btn-primary">SignUp</button>
         </div>
-        <div>
-          <Link to="/Login">
-            Already Have an Account?
-          </Link>{" "}
+        <div className="form-group">
+          <p className="text-muted">
+            Already have an account? <Link to="/login" className="text-decoration-none">Login</Link>
+          </p>
         </div>
       </form>
     </div>
+
   );
 }

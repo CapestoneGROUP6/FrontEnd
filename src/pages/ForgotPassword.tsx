@@ -137,23 +137,25 @@ function ForgotPassword() {
 
   return (
     <div>
-      <div>{state.serverError && <span>{state.serverError}</span>}</div>
+      <div >{state.serverError && <span className="text-danger">{state.serverError}</span>}</div>
       {state.view === "FORGOT_PASSWORD" && (
         <>
-        <h2>Forgot Password</h2>
-          <form onSubmit={submitForgotForm}>
-            <div>
-              <label htmlFor="email">Email:</label>
+          <form style={{ width: "30%", margin: "auto" }} className="mt-5" onSubmit={submitForgotForm}>
+            <h2 className="mb-4">Forgot Password</h2>
+            <div className="form-group">
+              <label style={{ marginTop: '15px' }} htmlFor="email">Email:</label>
               <input
                 type="email"
+                className="form-control"
                 name="email"
+                style={{ marginTop: '15px' }}
                 value={state.email}
                 onChange={onChange}
               />
-              {state.emailError && <span>{state.emailError}</span>}
+              {state.emailError && <span className="text-danger">{state.emailError}</span>}
             </div>
-            <div>
-              <button type="submit" disabled={!state.email}>
+            <div className="form-group">
+              <button type="submit" style={{ marginTop: '15px' }} className="btn btn-primary" disabled={!state.email}>
                 Send OTP
               </button>
             </div>
@@ -161,56 +163,59 @@ function ForgotPassword() {
         </>
       )}
       {state.view === "RESET_PASSWORD" && (
-        <>
-        <h2>Reset Password</h2>
+        <div style={{ width: '30%', margin: '50px auto', boxShadow: "0 0 10px lightgray", borderRadius: "10px", padding: "15px" }}>
+          <h2 className="mb-4">Reset Password</h2>
           <form onSubmit={submitResetForm}>
-            <div>
-              <label htmlFor="otp">Otp:</label>
+            <div className="mb-3">
+              <label htmlFor="otp" className="form-label">Otp:</label>
               <input
                 type="number"
+                className="form-control"
                 name="otp"
                 value={state.otp}
                 onChange={onChange}
                 required
               />
-              {state.otpError && <span>{state.otpError}</span>}
+              {state.otpError && <span className="text-danger">{state.otpError}</span>}
             </div>
-            <div>
-              <label htmlFor="password">Password:</label>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">Password:</label>
               <input
                 type="password"
+                className="form-control"
                 name="password"
                 value={state.password}
                 onChange={onChange}
                 required
               />
-              {state.passwordError && <span>{state.passwordError}</span>}
+              {state.passwordError && <span className="text-danger">{state.passwordError}</span>}
             </div>
-            <div>
-              <label htmlFor="confirmpassword">Confirm Password:</label>
+            <div className="mb-3">
+              <label htmlFor="confirmpassword" className="form-label">Confirm Password:</label>
               <input
                 type="password"
+                className="form-control"
                 name="confirmpassword"
                 value={state.confirmpassword}
                 onChange={onChange}
                 required
               />
               {state.confirmpasswordError && (
-                <span>{state.confirmpasswordError}</span>
+                <span className="text-danger">{state.confirmpasswordError}</span>
               )}
             </div>
             <div>
               <button
                 type="submit"
-                disabled={
-                  !state.password || !state.otp || !state.confirmpassword
-                }
+                className="btn btn-primary"
+                disabled={!state.password || !state.otp || !state.confirmpassword}
               >
                 Reset Password
               </button>
             </div>
           </form>
-        </>
+        </div>
+
       )}
     </div>
   );
