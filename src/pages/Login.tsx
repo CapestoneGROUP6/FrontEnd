@@ -77,12 +77,12 @@ export default function Login() {
   };
 
   return (
-    <div className="container" style={{ width: '30%', margin: '50px auto', boxShadow: "0 0 10px lightgray", borderRadius: "10px", padding: "15px" }}>
+    <div className="container" style={{ width: '30%', margin: 'auto', boxShadow: "0 0 10px lightgray", borderRadius: "10px", padding: "15px" }}>
       {state.serverError && <span className="text-danger">{state.serverError}</span>}
       <form className="mt-3" onSubmit={handleSubmit}>
         <h2>Login</h2>
         <div className="form-group">
-          <label htmlFor="username" className="col-form-label">Username:</label>
+          <label htmlFor="username" className="col-form-label" style={{display:"flex", flexDirection:"column", alignItems:"flex-start",fontSize:"18px"}}>Username:</label>
           <div>
             <input
               type="text"
@@ -95,7 +95,7 @@ export default function Login() {
           </div>
         </div>
         <div className="form-group" style={{ marginTop: '15px' }}>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password" style={{display:"flex", flexDirection:"column", alignItems:"flex-start",fontSize:"18px"}}>Password:</label>
           <input
             type="password"
             className="form-control"

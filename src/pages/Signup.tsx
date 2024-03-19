@@ -84,12 +84,12 @@ export default function Signup() {
   
 
   return (
-    <div className="container" style={{ width: '30%', margin: '50px auto', boxShadow: "0 0 10px lightgray", borderRadius: "10px" , padding:"15px"}}>
+    <div className="container" style={{ width: '30%', margin: 'auto', boxShadow: "0 0 10px lightgray", borderRadius: "10px" , padding:"15px"}}>
       <h2>Signup</h2>
       {state.serverError && <span className="text-danger">{state.serverError}</span>}
       <form className="mt-3" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label style={{ marginTop:"10px",}} htmlFor="username">Username:</label>
+          <label htmlFor="username" style={{display:"flex", marginTop:"10px",flexDirection:"column", alignItems:"flex-start",fontSize:"18px"}}>Username:</label>
           <input
             type="text"
             className="form-control"
@@ -101,7 +101,7 @@ export default function Signup() {
           {state.usernameError && <span className="text-danger">{state.usernameError}</span>}
         </div>
         <div className="form-group">
-          <label  style={{ marginTop:"10px",}} htmlFor="password">Password:</label>
+          <label style={{display:"flex", marginTop:"10px",flexDirection:"column", alignItems:"flex-start",fontSize:"18px"}} htmlFor="password">Password:</label>
           <input
             type="password"
             className="form-control"
@@ -113,7 +113,7 @@ export default function Signup() {
           {state.passwordError && <span className="text-danger">{state.passwordError}</span>}
         </div>
         <div className="form-group">
-          <label style={{ marginTop:"10px",}} htmlFor="email">Email:</label>
+          <label style={{display:"flex", flexDirection:"column",marginTop:"10px", alignItems:"flex-start",fontSize:"18px"}}  htmlFor="email">Email:</label>
           <input
             type="email"
             className="form-control"

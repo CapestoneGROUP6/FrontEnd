@@ -15,14 +15,24 @@ export default function Header() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        height:"10vh",
       }}
     >
-      <div style={{ color: 'white',padding:"10px" }}>Logo</div>
-      {loggedIn && <div style={{ color: 'white', cursor: 'pointer' }} onClick={() => dispatch(logout())}>Logout</div>}
+      <div style={{ color: 'white', padding: '10px', textAlign: 'center' }}><b>Logo</b>
+        <img src="logo.png" alt="" style={{ width: '50px', height: 'auto', borderRadius: '50%' }} />
+      </div>
+
+      {loggedIn && <>
+        <div style={{ color: 'white', marginRight: '15px', display: 'flex', alignItems: 'center' }}>
+          <Link style={{ color: 'white', textDecoration: "none", padding: "10px" }} to="/products">Books</Link>
+          <Link style={{ color: 'white', textDecoration: "none", padding: "10px" }} to="/addproduct">Add Book</Link>
+          <div style={{ color: 'white', cursor: 'pointer' }} onClick={() => dispatch(logout())}>Logout</div> &nbsp;
+        </div>
+      </>}
       {!loggedIn && (
         <div style={{ color: 'white', marginRight: '15px' }}>
-          <Link style={{ color: 'white', textDecoration: "none" ,padding:"10px"}} to="/login">Login</Link> &nbsp;
-          <Link style={{ color: 'white', textDecoration: "none",padding:"10px" }} to="/signup">Signup</Link>
+          <Link style={{ color: 'white', textDecoration: "none", padding: "10px" }} to="/login">Login</Link> &nbsp;
+          <Link style={{ color: 'white', textDecoration: "none", padding: "10px" }} to="/signup">Signup</Link>
         </div>
       )}
     </div>

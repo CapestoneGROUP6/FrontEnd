@@ -13,6 +13,8 @@
       "moduleResolution": "node",
     },
     
-    "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx", "src/**/*.jsx", "src/*.tsx"]
+    "include": ["src/**/*.js", "src/**/*.ts",
+     "src/**/*.tsx", "src/**/*.jsx", "src/*.tsx",
+      "src/images/*.png", "src/custom.d.ts", "custom.d.ts"]
   }
   

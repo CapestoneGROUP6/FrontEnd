@@ -140,10 +140,10 @@ function ForgotPassword() {
       <div >{state.serverError && <span className="text-danger">{state.serverError}</span>}</div>
       {state.view === "FORGOT_PASSWORD" && (
         <>
-          <form style={{ width: "30%", margin: "auto" }} className="mt-5" onSubmit={submitForgotForm}>
+          <form style={{ width: "30%", margin: "auto", }} className="mt-5" onSubmit={submitForgotForm}>
             <h2 className="mb-4">Forgot Password</h2>
             <div className="form-group">
-              <label style={{ marginTop: '15px' }} htmlFor="email">Email:</label>
+              <label style={{ marginTop: '15px', display: "flex", flexDirection: "column", alignItems: "flex-start", fontSize: "18px" }} htmlFor="email">Email:</label>
               <input
                 type="email"
                 className="form-control"
@@ -155,7 +155,7 @@ function ForgotPassword() {
               {state.emailError && <span className="text-danger">{state.emailError}</span>}
             </div>
             <div className="form-group">
-              <button type="submit" style={{ marginTop: '15px' }} className="btn btn-primary" disabled={!state.email}>
+              <button type="submit" style={{ marginTop: '15px', }} className="btn btn-primary" disabled={!state.email}>
                 Send OTP
               </button>
             </div>
@@ -167,7 +167,7 @@ function ForgotPassword() {
           <h2 className="mb-4">Reset Password</h2>
           <form onSubmit={submitResetForm}>
             <div className="mb-3">
-              <label htmlFor="otp" className="form-label">Otp:</label>
+              <label htmlFor="otp" className="form-label" style={{ display: "flex", marginTop: "10px", flexDirection: "column", alignItems: "flex-start", fontSize: "18px" }}>Otp:</label>
               <input
                 type="number"
                 className="form-control"
@@ -179,7 +179,7 @@ function ForgotPassword() {
               {state.otpError && <span className="text-danger">{state.otpError}</span>}
             </div>
             <div className="mb-3">
-              <label htmlFor="password" className="form-label">Password:</label>
+              <label htmlFor="password" className="form-label" style={{ display: "flex", marginTop: "10px", flexDirection: "column", alignItems: "flex-start", fontSize: "18px" }}>Password:</label>
               <input
                 type="password"
                 className="form-control"
@@ -191,7 +191,7 @@ function ForgotPassword() {
               {state.passwordError && <span className="text-danger">{state.passwordError}</span>}
             </div>
             <div className="mb-3">
-              <label htmlFor="confirmpassword" className="form-label">Confirm Password:</label>
+              <label htmlFor="confirmpassword" className="form-label" style={{ display: "flex", marginTop: "10px", flexDirection: "column", alignItems: "flex-start", fontSize: "18px" }}>Confirm Password:</label>
               <input
                 type="password"
                 className="form-control"
