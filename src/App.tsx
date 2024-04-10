@@ -15,6 +15,10 @@ import Auth from "Wrappers/Auth";
 import ProductsList from "pages/BooksList";
 import NewHeader from "components/NewHeader";
 import AddEditProfile from "pages/AddEditProfile";
+import UserCart from "pages/UserCart";
+import ProductDetails from "pages/ProductDetails";
+import CheckoutPage from "pages/CheckoutPage";
+import UserOrders from "pages/UserOrders";
 
 function App() {
   return (
@@ -22,9 +26,9 @@ function App() {
       <GlobalContextProvider>
         <RootWrapper>
           <NewHeader />
-          <div style={{minHeight:"80vh", padding:"15px", marginTop: '5rem'}}>
+          <div style={{minHeight:"80vh", padding:"15px",  marginTop: '5rem'}}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Auth element={<Home/>} />} />
             <Route path="/login" element={<NonAuth element={<Login />} />} />
             <Route path="/signup" element={<NonAuth element={<Signup />} />} />
             <Route
@@ -35,13 +39,29 @@ function App() {
               path="/addproduct"
               element={<Auth element={<AddProduct />} />}
             />
+             <Route
+              path="/cart"
+              element={<Auth element={<UserCart />} />}
+            />
             <Route
               path="/products"
               element={<Auth element={<ProductsList />} />}
             />
             <Route
+              path="/checkout"
+              element={<Auth element={<CheckoutPage />} />}
+            />
+            <Route
+              path="/productdetails/:id"
+              element={<Auth element={<ProductDetails />} />}
+            />
+            <Route
               path="/profile"
               element={<Auth element={<AddEditProfile />} />}
+            />
+            <Route
+              path="/orders"
+              element={<Auth element={<UserOrders />} />}
             />
           </Routes>
           </div>

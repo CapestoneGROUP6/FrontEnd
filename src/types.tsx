@@ -42,3 +42,20 @@ export interface GlobalContextState {
 export interface GlobalContext extends GlobalContextState {
   dispatch: React.Dispatch<CustomDispatchAction>;
 }
+
+export type Book = {
+  ID: number;
+  NAME: string;
+  PRICE: string;
+  Category_ID: number;
+  User_ID: number;
+  IsAdminApproved: number;
+  Image: string;
+  Description: string;
+};
+
+export type OrderInformation = {
+  orderItems: { itemDetails: Book, quantity: number }[],
+  orderid: number,
+  total: number
+}

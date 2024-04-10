@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API from '../services/APIService';
-import { Form, Button, Container, Row, Col, Alert, Card } from 'react-bootstrap';
+import { Grid, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material';
 
 export default function Categories({ onChange, showError }) {
     const [categories, setCategories] = useState([]);
@@ -29,29 +29,27 @@ export default function Categories({ onChange, showError }) {
 
     return (
         <>
-            <Form.Group as={Row} controlId="formName" className='mb-3'>
-                <Form.Label column sm="2">
-                    Select Category
-                </Form.Label>
-                <Col sm="10" className='d-flex flex-column align-items-start'>
-                    <Form.Control
-                        as="select"
-                        value={selectedCategory}
-                        onChange={handleCategoryChange}
-                    >
-                        <option value="" disabled>Select category...</option>
-                        {categories?.map((category) => (
-                            <option key={category.ID} value={category.ID}>
-                                {category.NAME}
-                            </option>
-                        ))}
-                    </Form.Control>
-                    {
-                        showError && <Form.Text className="text-danger text-left">Categories is Required</Form.Text>
-                    }
-
-                </Col>
-            </Form.Group>
+            <Grid container spacing={2}>
+                <Grid item xs={3}>
+                    <FormControl fullWidth>
+                        <InputLabel id="category-label">Select Category</InputLabel>
+                        <Select
+                            labelId="category-label"
+                            value={selectedCategory}
+                            onChange={handleCategoryChange}
+                            error={showError}
+                        >
+                            <MenuItem value="">All Categories</MenuItem>
+                            {categories?.map((category) => (
+                                <MenuItem key={category.ID} value={category.ID}>
+                                    {category.NAME}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                        {showError && <FormHelperText error>Category is Required</FormHelperText>}
+                    </FormControl>
+                </Grid>
+            </Grid>
         </>
     );
 }

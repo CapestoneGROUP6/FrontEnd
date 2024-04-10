@@ -9,6 +9,8 @@ import { useGlobalContext } from "providers/GlobalProvider";
 import { login } from "../providers/actionCreators";
 import { LoginSignUpResponse } from "../types";
 import { Link } from "react-router-dom";
+import { handleGoogleSign } from "services/firebase";
+import { Button, Grid, Paper, Typography } from "@mui/material";
 
 export default function Signup() {
   const { dispatch } = useGlobalContext();
@@ -81,59 +83,76 @@ export default function Signup() {
       }
     }
   };
-  
+
+  const googleLogin = async () => {
+    const data = await handleGoogleSign()
+    handleSignUpResponse(data as LoginSignUpResponse);
+  }
+
 
   return (
-    <div className="container" style={{ width: '30%', margin: 'auto', boxShadow: "0 0 10px lightgray", borderRadius: "10px" , padding:"15px"}}>
-      <h2>Signup</h2>
-      {state.serverError && <span className="text-danger">{state.serverError}</span>}
-      <form className="mt-3" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username" style={{display:"flex", marginTop:"10px",flexDirection:"column", alignItems:"flex-start",fontSize:"18px"}}>Username:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="username"
-            style={{ marginTop:"10px",}}
-            value={state.username}
-            onChange={onChange}
-          />
-          {state.usernameError && <span className="text-danger">{state.usernameError}</span>}
-        </div>
-        <div className="form-group">
-          <label style={{display:"flex", marginTop:"10px",flexDirection:"column", alignItems:"flex-start",fontSize:"18px"}} htmlFor="password">Password:</label>
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            style={{ marginTop:"10px",}}
-            value={state.password}
-            onChange={onChange}
-          />
-          {state.passwordError && <span className="text-danger">{state.passwordError}</span>}
-        </div>
-        <div className="form-group">
-          <label style={{display:"flex", flexDirection:"column",marginTop:"10px", alignItems:"flex-start",fontSize:"18px"}}  htmlFor="email">Email:</label>
-          <input
-            type="email"
-            className="form-control"
-            name="email"
-            style={{ marginTop:"10px",}}
-            value={state.email}
-            onChange={onChange}
-          />
-          {state.emailError && <span className="text-danger">{state.emailError}</span>}
-        </div>
-        <div className="form-group" style={{ marginTop:"10px",}}>
-          <button type="submit" className="btn btn-primary">SignUp</button>
-        </div>
-        <div className="form-group">
-          <p className="text-muted">
-            Already have an account? <Link to="/login" className="text-decoration-none">Login</Link>
-          </p>
-        </div>
-      </form>
-    </div>
-
+    <>
+      <Grid container justifyContent='center'>
+        <Grid item xs={10} md={4} >
+          <Paper elevation={10} style={{ padding: 20 }}>
+            <Grid container direction='column' justifyContent='center' spacing={2}>
+              <Grid item className="d-flex justify-content-center">
+                <Typography variant="h5" style={{ fontWeight: 'bold' }}>Signup</Typography>
+              </Grid>
+              {state.serverError && <span className="text-danger">
+                <Grid item className="d-flex justify-content-center">
+                  <Typography color={'red'}>{state.serverError}</Typography>
+                </Grid>
+              </span>}
+              <Grid item>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="username"
+                  value={state.username}
+                  onChange={onChange}
+                  placeholder="Username"
+                  style={{ height: '3rem' }}
+                />
+                {state.usernameError && <span className="text-danger">{state.usernameError}</span>}
+              </Grid>
+              <Grid item>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  value={state.password}
+                  onChange={onChange}
+                  placeholder="Password"
+                  style={{ height: '3rem' }}
+                />
+                {state.passwordError && <span className="text-danger">{state.passwordError}</span>}
+              </Grid>
+              <Grid item>
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Email"
+                  name="email"
+                  style={{ height: '3rem' }}
+                  value={state.email}
+                  onChange={onChange}
+                />
+                {state.emailError && <span className="text-danger">{state.emailError}</span>}
+              </Grid>
+              <Grid item className="d-flex justify-content-center">
+                <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>SignUp</Button>
+              </Grid>
+              <Grid item className="d-flex justify-content-center">
+                <img alt="Goolge LOgin" src="/google.png" style={{ width: '15rem', height: 'auto', objectFit: 'contain', cursor: 'pointer' }} onClick={googleLogin} />
+              </Grid>
+              <Grid item className="d-flex justify-content-center">
+                Already have an account? <Link to="/login" className="text-decoration-none">Login</Link>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+      </Grid>
+    </>
   );
 }

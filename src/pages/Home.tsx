@@ -5,11 +5,15 @@ import book2 from '../images/book2.jpg';
 import API from 'services/APIService';
 import ProductsList from './BooksList';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
-
+import { Button, Grid, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useGlobalContext } from 'providers/GlobalProvider';
 
 export default function Home() {
   const [categoryId, setCategoryId] = useState('')
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate()
+  const {user} = useGlobalContext()
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -30,7 +34,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div style={{background: '#eaeaea'}}>
       <div className="container-fluid p-0">
         <img
           src={banner}
@@ -39,27 +43,18 @@ export default function Home() {
           style={{ width: '100%', objectFit: "cover", maxHeight: '30rem' }}
         />
         <div className="banner-content">
-          <h1 style={{ textAlign: "center", margin: "3rem" }}>Welcome to Book Bazaar</h1>
+          <h3 style={{ textAlign: "center", fontSize: '2rem', margin: "3rem" }}>{user? user.NAME + ", " : ''}Welcome to Book Bazaar</h3>
         </div>
       </div>
 
-      <div className="container mt-4 text-center" style={{ margin: "auto", width: "60%", }}>
-        <blockquote >
-          <p>
-            "Books open minds, hearts, and worlds. Explore the magic within pages, where every word is a doorway to endless possibilities."
-          </p>
-        </blockquote>
-        <button className="btn btn-primary">Explore Books Here</button>
-      </div>
-
-      <div className="container mt-4" style={{ margin: "auto", width: "100%", padding: "15px", boxShadow: "5px 5px 10px lightgray" }}>
+      <div className="container mt-4" style={{ background: '#d9e7d6', borderRadius: '10px', margin: "auto", width: "100%", padding: "25px", boxShadow: "15px 15px 10px lightgray" }}>
         <div className="row">
           <div className="col-md-6">
             <img
               src={book2}
               className="img-fluid"
               alt="Side Image"
-              style={{ width: '100%', height: 'auto', borderRadius: "5%" }}
+              style={{ width: '80%', height: 'auto', borderRadius: "5%", objectFit: 'contain', margin: 'auto' }}
             />
           </div>
           <div className="col-md-6" style={{ padding: "0 0 10px 20px" }}>
@@ -70,64 +65,55 @@ export default function Home() {
             <p>
               Explore the rich world of literature with our carefully selected titles that span various genres and themes. Whether you're a fiction enthusiast, a history buff, or someone looking for self-improvement, we have something special just for you.
             </p>
-            <button className="btn btn-primary">Browse Our Collection</button>
+            <Button variant='contained' onClick={() => navigate("/products")}>Browse Our Collection</Button>
           </div>
         </div>
       </div><br />
-      <Container>
-        <div>
-          <h3>Products</h3>
-          <hr></hr>
-        </div>
-        <Row>
-          <Col md={12}>
-            <Row>
-              <Col
-                xs={1}
-                onClick={() => changeCat('')}
-                className='homeCategoryDiv'
-                style={{
-                  cursor: 'pointer',
-                  borderRadius: '5px 5px',
-                  border: '1px solid #c4c4c4',
-                  padding: '1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginRight: '8px',
-                }}
-              >
-                ALL
-              </Col>
-              {categories?.map(obj => (
-                <Col
-                  xs={1}
-                  key={obj.ID}
-                  onClick={() => changeCat(obj.ID)}
-                  className='homeCategoryDiv'
-                  style={{
-                    cursor: 'pointer',
-                    borderRadius: '5px 5px',
-                    border: '1px solid #c4c4c4',
-                    padding: '1rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginRight: '8px',
-                    backgroundColor: categoryId == obj.ID ? '#0d6efd': 'white',
-                    color: categoryId == obj.ID ? '#ffffff': 'black'
-                  }}
-                >
-                  {obj.NAME}
-                </Col>
-              ))}
-            </Row>
-          </Col>
-          <Col md={12}>
+      <Grid container direction='column' spacing={2}>
+        <Grid item>
+          <h3 className='text-center'>Featured Products</h3>
+        </Grid>
+        <Grid item>
+          <ProductsList categoryId={categoryId} showFilter={false} limit={'4'} featured/>
+        </Grid>
+      </Grid>
+      <Grid container direction='column' spacing={2}>
+        <Grid item>
+          <h3 className='text-center'>Products</h3>
+        </Grid>
+        <Grid item container spacing={2} justifyContent='center' alignItems='center'>
+          <Grid item xs={3} md={2}>
+            <Paper className='d-flex justify-content-center' elevation={15} style={{ cursor: 'pointer', padding: '20', borderRadius: '10px', height: '3rem' }} onClick={() => changeCat('')}>
+              <Grid container justifyContent='center' alignItems='center'>
+                <Grid item>
+                  ALL
+                </Grid>
+              </Grid>
+            </Paper>
+          </Grid>
+          {
+            categories?.map(obj => {
+              return <Grid item key={obj.ID} xs={3} md={2}>
+                <Paper className='d-flex justify-content-center' elevation={15} style={{
+                  cursor: 'pointer', padding: '20', borderRadius: '10px', backgroundColor: categoryId == obj.ID ? '#0d6efd' : 'white',
+                  color: categoryId == obj.ID ? '#ffffff' : 'black', height: '3rem'
+                }} onClick={() => changeCat(obj.ID)} >
+                  <Grid container justifyContent='center' alignItems='center'>
+                    <Grid item>
+                      {obj.NAME}
+                    </Grid>
+                  </Grid>
+                </Paper>
+              </Grid>
+            })
+          }
+        </Grid>
+        <Grid item xs={10} container justifyContent='center'>
+          <Grid item xs={10}>
             <ProductsList categoryId={categoryId} showFilter={false} />
-          </Col>
-        </Row>
-      </Container>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 }

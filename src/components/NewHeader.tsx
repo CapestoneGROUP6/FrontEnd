@@ -22,21 +22,29 @@ export default function NewHeader() {
               <img src="logo.png" alt="" style={{ width: '50px', height: 'auto', borderRadius: '50%' }} />
             </div>
           </a>
+          <nav style={{flexGrow: 1, marginLeft: '5px'}}>
+            <a className="text-white text-decoration-none mb-2 sidemenulink" onClick={() => handleLinkClick("/")}>Home</a>
+            <a className="text-white text-decoration-none mb-2 sidemenulink" onClick={() => handleLinkClick("/")}>About Us</a>
+            <a className="text-white text-decoration-none mb-2 sidemenulink" onClick={() => handleLinkClick("/")}>Contact</a>
+          </nav>
           <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="offcanvas offcanvas-end text-bg-dark" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
             <div className="offcanvas-header">
-            {loggedIn && <><h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Welcome {user.NAME}</h5></>}
-              
+              {loggedIn && <><h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">Welcome {user.NAME}</h5></>}
+
               <button type="button" id='closeButton' className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div className="offcanvas-body">
               {loggedIn && <>
                 <div className="d-flex flex-column">
+                  <a className="text-white text-decoration-none mb-2 sidemenulink" onClick={() => handleLinkClick("/")}>Home</a>
                   <a className="text-white text-decoration-none mb-2 sidemenulink" onClick={() => handleLinkClick("/profile")}>Profile</a>
+                  <a className="text-white text-decoration-none mb-2 sidemenulink" onClick={() => handleLinkClick("/cart")}>Cart</a>
                   <a className="text-white text-decoration-none mb-2 sidemenulink" onClick={() => handleLinkClick("/products")}>Books</a>
                   <a className="text-white text-decoration-none mb-2 sidemenulink" onClick={() => handleLinkClick("/addproduct")}>Add Book</a>
+                  <a className="text-white text-decoration-none mb-2 sidemenulink" onClick={() => handleLinkClick("/orders")}>My Orders</a>
                   <div className="text-white cursor-pointer mb-2 sidemenulink" onClick={() => dispatch(logout())}>Logout</div>
                 </div>
               </>}

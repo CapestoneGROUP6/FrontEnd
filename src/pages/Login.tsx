@@ -8,6 +8,8 @@ import { useGlobalContext } from "providers/GlobalProvider";
 import { login } from "../providers/actionCreators";
 import { LoginSignUpResponse } from "../types";
 import { Link } from "react-router-dom";
+import { handleGoogleSign } from "services/firebase";
+import { Button, Grid, Paper, Typography } from "@mui/material";
 
 export default function Login() {
   const { dispatch } = useGlobalContext();
@@ -76,51 +78,66 @@ export default function Login() {
     }
   };
 
-  return (
-    <div className="container" style={{ width: '30%', margin: 'auto', boxShadow: "0 0 10px lightgray", borderRadius: "10px", padding: "15px" }}>
-      {state.serverError && <span className="text-danger">{state.serverError}</span>}
-      <form className="mt-3" onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <div className="form-group">
-          <label htmlFor="username" className="col-form-label" style={{display:"flex", flexDirection:"column", alignItems:"flex-start",fontSize:"18px"}}>Username:</label>
-          <div>
-            <input
-              type="text"
-              className="form-control"
-              name="username"
-              value={state.username}
-              onChange={onChange}
-            />
-            {state.usernameError && <span className="text-danger">{state.usernameError}</span>}
-          </div>
-        </div>
-        <div className="form-group" style={{ marginTop: '15px' }}>
-          <label htmlFor="password" style={{display:"flex", flexDirection:"column", alignItems:"flex-start",fontSize:"18px"}}>Password:</label>
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            style={{ marginTop: '15px' }}
-            value={state.password}
-            onChange={onChange}
-          />
-          {state.passwordError && <span className="text-danger">{state.passwordError}</span>}
-        </div>
-        <div className="form-group" style={{ marginTop: '15px' }}>
-          <button type="submit" className="btn btn-primary">Login</button>
-        </div>
-        <div className="form-group" style={{ marginTop: '15px' }}>
-          <p className="text-muted">
-            Don't have an account? <Link to="/signup" className="text-decoration-none">Sign up</Link>
-          </p>
-        </div>
-        <div className="form-group" style={{ marginTop: '15px' }}>
-          <p className="text-muted">
-            <Link to="/forgotpassword" className="text-decoration-none">Forgot Password</Link>{" "}
-          </p>
-        </div>
-      </form>
-    </div>
+  const googleLogin = async () => {
+    const data = await handleGoogleSign()
+    handleLoginResponse(data as LoginSignUpResponse);
+  }
 
+  return (
+    <>
+      <Grid container justifyContent='center'>
+        <Grid item xs={10} md={4} >
+          <Paper elevation={10} style={{padding: 20}}>
+            <Grid container direction='column' justifyContent='center' spacing={2}>
+              <Grid item className="d-flex justify-content-center">
+                <Typography variant="h5" style={{fontWeight: 'bold'}}>Login</Typography>
+              </Grid>
+              {state.serverError && <span className="text-danger">
+                <Grid item className="d-flex justify-content-center">
+                  <Typography color={'red'}>{state.serverError}</Typography>
+                </Grid>
+              </span>}
+              <Grid item>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="username"
+                  value={state.username}
+                  onChange={onChange}
+                  placeholder="Username"
+                  style={{height: '3rem'}}
+                />
+                {state.usernameError && <span className="text-danger">{state.usernameError}</span>}
+              </Grid>
+              <Grid item>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  value={state.password}
+                  onChange={onChange}
+                  placeholder="Password"
+                  style={{height: '3rem'}}
+                />
+                {state.passwordError && <span className="text-danger">{state.passwordError}</span>}
+              </Grid>
+              <Grid item className="d-flex justify-content-center">
+                <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}>Login</Button>
+              </Grid>
+              <Grid item className="d-flex justify-content-center">
+                <img alt="Goolge LOgin" src="/google.png" style={{ width: '15rem', height: 'auto', objectFit: 'contain', cursor: 'pointer' }} onClick={googleLogin} />
+              </Grid>
+              <Grid item className="d-flex justify-content-center">
+                Don't have an account? <Link to="/signup" className="text-decoration-none">Sign up</Link>
+              </Grid>
+              <Grid item className="d-flex justify-content-center">
+                <Link to="/forgotpassword" className="text-decoration-none">Forgot Password</Link>{" "}
+              </Grid>
+
+            </Grid>
+          </Paper>
+        </Grid>
+      </Grid>
+    </>
   );
 }

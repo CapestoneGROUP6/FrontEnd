@@ -12,6 +12,6 @@ export default function Auth(props: AuthType) {
   if (loggedIn) {
     return <>{props.element}</>;
   } else {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 }
